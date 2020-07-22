@@ -116,6 +116,13 @@ export default {
     saveQuery: {
       type: Boolean,
       default: true
+    },
+    /**
+     * error 特殊处理异常情况
+     */
+    throwErrorData:{
+      type: Function,
+      default: null
     }
   },
   data() {
@@ -195,7 +202,10 @@ export default {
 
       try {
         const {data: resp} = await this.$axios.get(url + queryStr)
-
+        // 特殊处理异常情况
+        if(this.throwErrorData && this.throwErrorData(resp)){
+           throw new Error(resp)
+        }
         // 当读取结果为undefined时取默认值[]
         const data = _get(resp, this.dataPath, [])
         const action = isDirectionDown ? 'push' : 'unshift'
