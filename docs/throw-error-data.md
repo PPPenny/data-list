@@ -32,8 +32,10 @@ export default {
      error(e){
       this.errorMsg = e.message
     },
-     throwCustomError(data){
-      return !_get(data, 'payload')
+     throwCustomError(resp){
+       if(!_get(resp, 'payload')){
+         throw resp
+       }
     }
   }
 }
