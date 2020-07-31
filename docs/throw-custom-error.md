@@ -1,5 +1,5 @@
 
-throw-error-data
+throw-custom-error
 
 ```vue
 <template>
