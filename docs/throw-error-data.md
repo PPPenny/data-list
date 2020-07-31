@@ -23,7 +23,7 @@ export default {
     return {
         listConfig:{
            url: 'https://mockapi.eolinker.com/KNhMPAkb444ac06613fc8d63795be9ad0beaf55011936ac/data-list',
-           throwErrorData:this.throwErrorData
+           throwCustomError:this.throwCustomError
         },
        errorMsg:''
     }
@@ -32,10 +32,8 @@ export default {
      error(e){
       this.errorMsg = e.message
     },
-     throwErrorData(data){
-      if(!_get(data, 'payload')){
-       throw new Error(data.msg)
-      }
+     throwCustomError(data){
+      return !_get(data, 'payload')
     }
   }
 }
